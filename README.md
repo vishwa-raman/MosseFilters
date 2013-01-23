@@ -24,7 +24,7 @@ We have implemented MOSSE filters to detect the location of the irises and the n
 
 The code is organized into two directories,
 
-1. src, which contains the sources to build a tracking library called libtrack.a. This library contains code for both training the MOSSE filters and the SVM models and for classification. 
+1. src, which contains the sources to build a tracking library called libtrack.a. This library contains code for both training the MOSSE filters and the SVM models, and for runtime classification. 
 2. utils, which contains a number of files used to build a set of executables that use the tracking library to provide training and classification functionalities.
 
 ### Training and classification
@@ -61,6 +61,8 @@ Given these annotations, we build MOSSE filters for the irises and the nose. Usi
 The SVM-Light trainer is used as a separate process after generating all the data sets required for training. But for runtime classification, we build the SVM-Light classifier into the final classifier executable. 
 
 *The dependencies are OpenCV, OpenMP, and fftw.*
+
+We use openMP based parallelism where possible to accelerate training and classification.
 
 The code is written in C++ and has been deployed in a ROS based prototype multi-modal in-car intelligent agent for driver interactions. The head orientation is one of the modalities that is used to realize a context aware dialog manager.
 
